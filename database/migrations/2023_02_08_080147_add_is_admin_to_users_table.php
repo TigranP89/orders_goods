@@ -13,12 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('shop_goods', function (Blueprint $table) {
-            $table->id();
-            $table->string('product_name');
-            $table->float('product_price');
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->boolean('is_admin')->default(false);
         });
     }
 
@@ -29,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shop_goods');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

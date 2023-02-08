@@ -2,10 +2,24 @@
 
 namespace App\Http\Controllers\Shop;
 
+use App\Models\ShopOrder;
 use Illuminate\Http\Request;
+use App\Repoitories\ShopOrderRepository;
 
 class OrderController extends BaseController
 {
+
+    /**
+     * @var ShopOrderRepository
+     */
+    private $shopOrderRepository;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->shopOrderRepository = app(ShopOrderRepository::class);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +27,10 @@ class OrderController extends BaseController
      */
     public function index()
     {
-        //
+
+        $paginator = $this->shopOrderRepository->getAllWithPaginate(10);
+
+        return view('shop.admin.index', compact('paginator'));
     }
 
     /**
