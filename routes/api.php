@@ -17,7 +17,3 @@ use App\Http\Controllers\Shop\OrderController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::group(['prefix' => 'shop'], function (){
-    Route::get('orders',[OrderController::class, 'index']);
-});

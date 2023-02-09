@@ -27,10 +27,9 @@ class OrderController extends BaseController
      */
     public function index()
     {
-
-        $paginator = $this->shopOrderRepository->getAllWithPaginate(10);
-
-        return view('shop.admin.index', compact('paginator'));
+        $orders = $this->shopOrderRepository->getAllOrders();
+            dd($orders  );
+        return view('shop.admin.index', compact('orders'));
     }
 
     /**

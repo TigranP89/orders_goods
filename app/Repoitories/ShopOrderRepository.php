@@ -4,7 +4,6 @@
 namespace App\Repoitories;
 use App\Models\ShopOrder as Model;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\DB;
 
 class ShopOrderRepository extends CoreRepository
 {
@@ -16,20 +15,21 @@ class ShopOrderRepository extends CoreRepository
         return Model::class;
     }
 
+
     /**
-     * Get categories for output by paginators.
+     * Get the list of orders to display in datatable.
      *
-     * @param int|null $perpage
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return array|\Illuminate\Contracts\Foundation\Application[]|Collection|\Illuminate\Database\Eloquent\Model[]
      */
-    public function getAllWithPaginate($perpage = null)
+    public function getAllOrders()
     {
         $columns = ['id', 'order_date', 'phone_num', 'email', 'address', 'order_list', 'order_price'];
 
         $result = $this
             ->startConditions()
             ->select($columns)
-            ->paginate($perpage);
+            ->toBase()
+            ->get();
 
         return $result;
     }
